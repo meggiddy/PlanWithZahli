@@ -1,8 +1,20 @@
-import * as firebase from "firebase";
-import "@firebase/auth";
-import "@firebase/firestore";
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/firestore";
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { getAnalytics } from "firebase/analytics";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signInWithPopup,
+  GoogleAuthProvider,
+  signInWithRedirect,
+  getRedirectResult,
+} from "firebase/auth";
+
+const provider = new GoogleAuthProvider();
 
 const firebaseConfig = {
   apiKey: "AIzaSyCHPHyskZt4X5YSbIJHFaw4W0ZTMhXRovY",
@@ -18,10 +30,5 @@ if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-
-const auth = getAuth(app);
 
 export { firebaseConfig };
