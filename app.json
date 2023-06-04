@@ -19,7 +19,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-zahliBlackLogo.png",
+        "foregroundImage": "./assets/zahliBlackLogo.png",
         "backgroundColor": "#ffffff"
       }
     },

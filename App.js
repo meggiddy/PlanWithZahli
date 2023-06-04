@@ -9,6 +9,7 @@ import {
 import { app } from "./firebase/firebase";
 import { getFirestore, addDoc, getDocs, collection } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import Login from "./src/screens/Login";
 
 export default function App() {
   const [title, setTitle] = useState("");
@@ -30,14 +31,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working </Text>
-      <TextInput
-        value={title}
-        onChangeText={(text) => setTitle(text)}
-        placeholder="Enter a todo"
-        style={styles.input}
-      />
-      <Button title="Add Todo" onPress={addTodo} />
+      <Login />
     </View>
   );
 }

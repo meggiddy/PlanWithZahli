@@ -1,10 +1,13 @@
-import { TouchableOpacity } from "react-native/types";
+import { TouchableOpacity } from "react-native";
 
 export default function Login() {
   return (
     <View style={styles.container}>
       <View style={styles.logoContainer}>
-        <Image style={styles.logoImage} source={"../../assets/zahliBlackLogo"} />
+        <Image
+          style={styles.logoImage}
+          source={"../../assets/zahliBlackLogo"}
+        />
       </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.button}>
@@ -23,12 +26,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  logoContainer:{},
+  logoContainer: {},
   logoImage: {
     width: 200,
     height: 200,
   },
-  buttonContainer:{},
-  button:{},
+  buttonContainer: {},
+  button: {},
   buttonText: {},
 });
