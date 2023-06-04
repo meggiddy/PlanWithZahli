@@ -1,54 +1,33 @@
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-  Button,
-  FlatList,
-} from "react-native";
-import { app } from "./firebase/firebase";
-import { getFirestore, addDoc, getDocs, collection } from "firebase/firestore";
-import { useEffect, useState } from "react";
-import Login from "./src/screens/Login";
+import 'react-native-gesture-handler';
+import React, { useEffect, useState } from 'react'
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
+import { LoginScreen, HomeScreen, RegistrationScreen } from './src/screens'
+import {decode, encode} from 'base-64'
+if (!global.btoa) {  global.btoa = encode }
+if (!global.atob) { global.atob = decode }
+
+const Stack = createStackNavigator();
 
 export default function App() {
-  const [title, setTitle] = useState("");
-  const [completed, setCompleted] = useState(false);
-  const db = getFirestore(app);
 
-  const addTodo = async () => {
-    try {
-      const docRef = await addDoc(collection(db, "todos"), {
-        title,
-        completed,
-      });
-      setTitle("");
-      console.log("Document written with ID: ", docRef.id);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const [loading, setLoading] = useState(true)
+  const [user, setUser] = useState(null)
 
   return (
-    <View style={styles.container}>
-      <Login />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        { user ? (
+          <Stack.Screen name="Home">
+            {props => <HomeScreen {...props} extraData={user} />}
+          </Stack.Screen>
+        ) : (
+          <>
+            <Stack.Screen name="Login" component={LoginScreen} />
+            <Stack.Screen name="Registration" component={RegistrationScreen} />
+          </>
+        )}
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    marginTop: 400,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  input: {
-    height: 40,
-    width: 200,
-    borderWidth: 1,
-    borderColor: "black",
-    margin: 10,
-  },
-});
